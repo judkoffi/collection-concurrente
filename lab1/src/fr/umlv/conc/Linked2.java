@@ -1,13 +1,9 @@
 package fr.umlv.conc;
 
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
-
-/*
- * 3. Le faite de stocker l'element E dans un AtomicReference fait payer le cout d'une indirection
- * pour aller chercher la valeur de E
- */
 
 public class Linked2<E> {
 
@@ -21,15 +17,25 @@ public class Linked2<E> {
     }
   }
 
-  private final AtomicReference<Entry<E>> head = new AtomicReference<>();
+  private Entry<E> head;
+  private static final VarHandle VARHANDLE;
+
+  static {
+    var lookup = MethodHandles.lookup();
+    try {
+      VARHANDLE = lookup.findVarHandle(Linked2.class, "head", Entry.class);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      throw new AssertionError(e);
+    }
+  }
 
   public void addFirst(E element) {
     Objects.requireNonNull(element);
 
     for (;;) {
-      var currentHead = head.get();
+      var currentHead = head;
       var newHead = new Entry<>(element, currentHead);
-      if (head.compareAndSet(currentHead, newHead)) {
+      if (VARHANDLE.compareAndSet(this, currentHead, newHead)) {
         return;
       }
     }
@@ -37,9 +43,7 @@ public class Linked2<E> {
 
   public int size() {
     var size = 0;
-    // link est une variable local donc elle n'est pas forcement relu en
-    // mémoire
-    for (var link = head.get(); link != null; link = link.next) {
+    for (var link = head; link != null; link = link.next) {
       size++;
     }
     return size;

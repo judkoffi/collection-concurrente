@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class Counter {
   // private int counter;
 
-  private volatile int counter;
+  private volatile int count;
 
   public int nextInt() {
-    return counter++;
+    return count++;
   }
 
   public static void main(String[] args) throws InterruptedException {
@@ -41,6 +41,6 @@ public class Counter {
       thread.join();
     }
 
-    System.out.println(counter.counter);
+    System.out.println(counter.count);
   }
 }
