@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 
 public class Counter {
-  // private int counter;
+  // private int count;
 
   private volatile int count;
 
