@@ -1,4 +1,4 @@
-package fr.umlv.conc;
+package fr.umlv.conc.lab1;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
@@ -17,7 +17,7 @@ public class Linked2<E> {
     }
   }
 
-  private Entry<E> head;
+  private volatile Entry<E> head;
   private static final VarHandle VARHANDLE;
 
   static {
@@ -33,7 +33,7 @@ public class Linked2<E> {
     Objects.requireNonNull(element);
 
     for (;;) {
-      var currentHead = head;
+      var currentHead = head; // si head n'est pas volatile VARHANDLE.getVolatile(this)
       var newHead = new Entry<>(element, currentHead);
       if (VARHANDLE.compareAndSet(this, currentHead, newHead)) {
         return;

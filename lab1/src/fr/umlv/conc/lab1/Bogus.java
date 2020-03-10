@@ -1,4 +1,4 @@
-package fr.umlv.conc;
+package fr.umlv.conc.lab1;
 
 /*
  * 1. Le programme lance un thread qui execute une méthode qui incrémenter une variable tant que le

@@ -1,4 +1,4 @@
-package fr.umlv.conc;
+package fr.umlv.conc.lab1;
 
 import java.util.ArrayList;
 

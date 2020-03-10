@@ -1,15 +1,9 @@
-package fr.umlv.conc;
+package fr.umlv.conc.lab1;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
-/*
- * 3. Le faite de stocker l'element E dans un AtomicReference fait payer le cout d'une indirection
- * pour aller chercher la valeur de E
- */
-
-public class LinkedAtomic<E> {
+public class Linked<E> {
 
   private static class Entry<E> {
     private final E element;
@@ -21,32 +15,23 @@ public class LinkedAtomic<E> {
     }
   }
 
-  private final AtomicReference<Entry<E>> head = new AtomicReference<>();
+  private Entry<E> head;
 
   public void addFirst(E element) {
     Objects.requireNonNull(element);
-
-    for (;;) {
-      var currentHead = head.get();
-      var newHead = new Entry<>(element, currentHead);
-      if (head.compareAndSet(currentHead, newHead)) {
-        return;
-      }
-    }
+    head = new Entry<>(element, head);
   }
 
   public int size() {
     var size = 0;
-    // link est une variable local donc elle n'est pas forcement relu en
-    // mémoire
-    for (var link = head.get(); link != null; link = link.next) {
+    for (var link = head; link != null; link = link.next) {
       size++;
     }
     return size;
   }
 
   public static void main(String[] args) throws InterruptedException {
-    var list = new LinkedAtomic<String>();
+    var list = new Linked<String>();
     var threads = new ArrayList<Thread>();
 
     for (var i = 0; i < 4; i++) {
