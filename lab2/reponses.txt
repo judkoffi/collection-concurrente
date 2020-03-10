@@ -1,0 +1,25 @@
+Exo 1:
+
+1. Expliquer ce qu'est le problème de publication ? 
+===> Le problème publication est qu'un thread peut acceder à la référence d'un objet avant que ces champs ne soit initialiser
+
+2. Le code suivant a un problème de publication, expliquer lequel. 
+===> Le champs private String value n'est pas final
+
+3. Le code suivant a-t'il un problème de publication ? Si oui comment le corriger ?
+===> Le champs namee a un problème de publication, on peut le résoudre en le mettant fianl
+
+4. Le code suivant a-t'il un problème de publication ? Si oui comment le corriger ? 
+===> Non, car il y un champs volatile a la fin du constructeur qui force les lecture et les écriture en ram
+
+5. Le code suivant a-t'il un problème de publication ? Si oui comment le corriger ?
+===> Oui car le this est publier et un thread est lancé dans le constructeur
+	 Pour corriger, on met le thread dans une autre méthode 
+
+6. Le code suivant a-t'il un problème de publication ? Si oui comment le corriger ? 
+===> ça marche car name et age sont les argument du constructeur et non le this.name et this.age
+
+Exo2:
+
+1.
+===> il faut delarer le champs Entry next en tant que volatile
