@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /*
- * Better implementation than LockFreeStringList using a field to storee a tail of list. Tail's
+ * Better implementation than LockFreeStringList using a field to store a tail of list. Tail's
  * field avoid run through list
  */
 public class LockFreeStringList2 {

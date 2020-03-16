@@ -9,6 +9,18 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LockFreeStringList {
+
+  public class Person {
+    private String name;
+    private volatile int age;
+    
+    public Person(String name, int age) { 
+      this.name = name;
+      this.age = age;
+    }
+  }
+
+
   static final class Entry {
     private final String element;
     private volatile Entry next;
@@ -30,6 +42,7 @@ public class LockFreeStringList {
       throw new AssertionError(e);
     }
   }
+
 
   public LockFreeStringList() {
     head = new Entry(null); // fake first entry

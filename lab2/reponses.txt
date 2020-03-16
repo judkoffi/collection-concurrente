@@ -23,3 +23,12 @@ Exo2:
 
 1.
 ===> il faut delarer le champs Entry next en tant que volatile
+
+
+Exo3:
+
+ sort <file> | uniq --count --> commande pour compter les doublons
+
+ 
+1.
+===> 
