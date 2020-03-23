@@ -25,10 +25,10 @@ Exo2:
 ===> il faut delarer le champs Entry next en tant que volatile
 
 
-Exo3:
-
- sort <file> | uniq --count --> commande pour compter les doublons
-
+Exo3: 
+//sort <file> | uniq --count --> commande pour compter les doublons
  
 1.
-===> 
+===> La classe COWSet n'est pas thread safe car le champ hashArray est accédé en lecture et écriture
+ dans la méthode add et forEach sans aucun mécanisme qui le protège des accèes concurrents
+   
