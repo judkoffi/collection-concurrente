@@ -1,0 +1,15 @@
+Exo 1:
+
+1. non ré-entrant c'est le fait que lorsque l'on est dans une fonction personne d'autre n'a le droit d'être dedans 
+(pas une autre thread et pas la même thread)
+
+2. Pour la classe SpinLock est thread-safe, alors counter vaut 1_000_000
+La classe est pas thread safe car les méthode lovk() et unlock() ne sont pas implémenter
+
+3. Que doit-on faire si on arrive pas à acquérir le lock ? Quel est le problème ? 
+Pourquoi utiliser Thread.onSpinWait permet de résoudre le problème ?
+Sachant que les CPUs modernes ont un pipeline, à votre avis, à quoi sert Thread.onSpinWait ? 
+
+Si on arrive pas a aavoir le lock, il sfaudrait endormir le thread, mais cela provoque de l'attente
+actif
+Thread.onSpinWait() permet de faire l'attente actif sans faire chausser le CPU
