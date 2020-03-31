@@ -3,10 +3,20 @@ package fr.umlv.conc;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 
+// Tips volatile:
+/*
+ * Toujours lire les volire avant de lire les autres champs, cela garantie que les champs seront lu
+ * en RAM
+ */
+
+/*
+ * Toujours ecrire les autres champs avant les volatiles, cela garantie que les champs seront écrits
+ * en RAM
+ */
+
 public class ReentrantSpinLock {
   private volatile int lock;
-  private volatile Thread ownerThread;
-
+  private Thread ownerThread;
 
   private static final VarHandle LOCK_HANDLE;
 
@@ -42,9 +52,9 @@ public class ReentrantSpinLock {
         lock++;
         return;
       }
-
       Thread.onSpinWait();
     }
+
   }
 
   public void unlock() {
