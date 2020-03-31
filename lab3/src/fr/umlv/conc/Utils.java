@@ -18,20 +18,22 @@ public class Utils {
     }
   }
 
-  public static Path getHome() {
-    var home = HANDLE.getAcquire();
-    if (home == null) {
-      synchronized (LOCK) {
-        home = HANDLE.getAcquire();
-        if (home == null) {
-          System.out.println("init");
-          HANDLE.setRelease(Path.of(System.getenv("HOME")));
-        }
-      }
-    }
-    return HOME;
+  /*
+   * public static Path getHome() { var home = HANDLE.getAcquire(); if (home == null) { synchronized
+   * (LOCK) { home = HANDLE.getAcquire(); if (home == null) { System.out.println("init");
+   * HANDLE.setRelease(Path.of(System.getenv("HOME"))); } } } return HOME; }
+   */
+
+
+
+  public static class UtilsHolder {
+    private static final Path INSTANCE = Path.of(System.getenv("HOME"));
   }
 
+
+  public static Path getHome() {
+    return UtilsHolder.INSTANCE;
+  }
 
   public static void main(String[] args) {
 

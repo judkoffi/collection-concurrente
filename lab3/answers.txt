@@ -23,3 +23,15 @@ Il est pas thread save car si deux thread accede a HOME, il peut être initialis
 
 3.Pourquoi le code suivant ne marche pas non plus ? 
 On peut se faire desceduler juste avant de prendre le lock
+
+
+Holder times:
+real	1m23,530s
+user	1m10,184s
+sys	1m14,705s
+
+
+Singleton lazy times:
+real	1m23,371s
+user	1m10,431s
+sys	1m15,598s
