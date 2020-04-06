@@ -12,7 +12,7 @@ Sachant que les CPUs modernes ont un pipeline, à votre avis, à quoi sert Threa
 
 Si on arrive pas a aavoir le lock, il sfaudrait endormir le thread, mais cela provoque de l'attente
 actif
-Thread.onSpinWait() permet de faire l'attente actif sans faire chausser le CPU
+Thread.onSpinWait() permet de faire l'attente actif sans faire chauffer le CPU
 
 Exo 3:
 1. Pourquoi le code suivant ne marche pas ? 

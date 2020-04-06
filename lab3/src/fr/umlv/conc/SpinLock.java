@@ -18,12 +18,6 @@ public class SpinLock {
     }
   }
 
-  public void lock() {
-    while (!HANDLE.compareAndSet(this, false, true)) {
-      Thread.onSpinWait();
-    }
-  }
-
   public void unlock() {
     // volatile write
     locked = false;
@@ -33,6 +27,12 @@ public class SpinLock {
     // on essaie de prend si on peu on le prends donc ol le passe a true
     // sinon on l'a pas et on renvoie false
     return HANDLE.compareAndSet(this, false, true);
+  }
+
+  public void lock() {
+    while (!HANDLE.compareAndSet(this, false, true)) {
+      Thread.onSpinWait();
+    }
   }
 
   public static void main(String[] args) throws InterruptedException {
