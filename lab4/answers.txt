@@ -1,0 +1,17 @@
+Exo 1:
+
+
+
+
+Exo2:
+3.
+1.Pourquoi on ne peut pas utiliser un ThreadPoolExecutor classique comme piscine à threads mais un ForkJoinPool dans notre cas ? 
+
+Si on fait un join dans un runnable, ça risque de provoquer un dead lock
+juste on attend le resultat des tas précédents
+
+
+2. Comment obtenir les ForkJoinPool par défaut ?
+==> ForkJoinPool.commonPool()
+
+3.
