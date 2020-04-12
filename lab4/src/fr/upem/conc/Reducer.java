@@ -10,7 +10,7 @@ public class Reducer {
   private Reducer() {}
 
   @SuppressWarnings("serial")
-  private static class ReducerTask extends RecursiveTask<Integer> {
+  private static class IntegerReducerTask extends RecursiveTask<Integer> {
     private final int[] array;
     private final int startIndex;
     private final int endIndex;
@@ -19,7 +19,7 @@ public class Reducer {
     public static final int SMALL_LIMIT = 1024;
 
 
-    private ReducerTask(int startIndex, int endIndex, int[] array, int initial,
+    private IntegerReducerTask(int startIndex, int endIndex, int[] array, int initial,
         IntBinaryOperator op) {
       this.array = array;
       this.operator = op;
@@ -45,8 +45,8 @@ public class Reducer {
       }
 
       var middle = (startIndex + endIndex) / 2;
-      var part1 = new ReducerTask(startIndex, middle, array, initialValue, operator);
-      var part2 = new ReducerTask(middle, endIndex, array, initialValue, operator);
+      var part1 = new IntegerReducerTask(startIndex, middle, array, initialValue, operator);
+      var part2 = new IntegerReducerTask(middle, endIndex, array, initialValue, operator);
 
       part1.fork();
 
@@ -126,7 +126,7 @@ public class Reducer {
   private static int parallelReduceWithForkJoin(int[] array, int initial, IntBinaryOperator op) {
     return ForkJoinPool//
       .commonPool()
-      .invoke(new ReducerTask(0, array.length, array, initial, op));
+      .invoke(new IntegerReducerTask(0, array.length, array, initial, op));
   }
 
 
