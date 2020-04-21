@@ -1,0 +1,41 @@
+Exo1:
+1.
+Benchmark                     Mode  Cnt    Score     Error  Units
+VectorizedBenchMark.sum_loop  avgt    5  486.091 ± 244.919  us/op
+
+
+2.
+
+Fork/join et vector: c'est des API pour faire des calcul en parralele
+Vector fait parallelise les instructions du CPU 
+
+
+4.
+Dans la classe VectorizedBenchMark, dupliquer la méthode de benchmark pour benchmarker la méthode sumReduceLane.
+Lancer le benchmark, est-ce que le résultat est satifaisant (la réponse est non), pourquoi ? 
+
+Benchmark                            Mode  Cnt    Score    Error  Units
+VectorizedBenchMark.sum_loop         avgt    5  417.855 ± 61.281  us/op
+VectorizedBenchMark.sum_vector_loop  avgt    5  332.200 ± 23.853  us/op
+
+Non, car c'est censer etre 8 fois plus rapique ce qui est pas le cas pour l'instant
+
+5.
+
+
+
+Exo3:
+1.
+reduceLanes n'est pas disponible pour la soustraction
+
+3.
+
+Benchmark                                Mode  Cnt     Score    Error  Units
+VectorizedBenchMark.difference_lanewise  avgt    5  1097.586 ±  2.508  us/op
+VectorizedBenchMark.sub_loop             avgt    5   324.864 ±  1.247  us/op
+VectorizedBenchMark.sum_lanewise         avgt    5  1097.182 ±  3.532  us/op
+VectorizedBenchMark.sum_loop             avgt    5   321.889 ±  0.887  us/op
+VectorizedBenchMark.sum_reduce_lane      avgt    5   254.517 ± 29.049  us/op
+
+
+Exo4:
