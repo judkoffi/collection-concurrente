@@ -16,7 +16,7 @@ public class Reducer {
     private final int endIndex;
     private final int initialValue;
     private final IntBinaryOperator operator;
-    public static final int SMALL_LIMIT = 1024;
+    public static final int THRESHOLD = 1024;
 
 
     private IntegerReducerTask(int startIndex, int endIndex, int[] array, int initial,
@@ -40,7 +40,7 @@ public class Reducer {
     // return combined results
     @Override
     protected Integer compute() {
-      if (endIndex - startIndex <= SMALL_LIMIT) {
+      if (endIndex - startIndex <= THRESHOLD) {
         return Arrays.stream(array, startIndex, endIndex).reduce(initialValue, operator);
       }
 
