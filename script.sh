@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ev
 
-if [ "$FOLDER" = "lab6" ]; then
+if [ "$FOLDER" = "lab5" ]; then
     if [ "$OSTYPE" = "darwin17" ]; then # OS = osx
         wget https://github.com/forax/java-next/releases/download/untagged-bf24edb7ff6b12ce0d49/jdk-15-vector-osx.tar.gz
         tar xvf jdk-15-vector-osx.tar.gz
