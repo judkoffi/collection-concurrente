@@ -13,4 +13,14 @@ if [ "$FOLDER" = "lab6" ]; then
 fi
 
 cd $FOLDER
+
+echo $JAVA_HOME
+
+$JAVA_HOME/bin/java --version
+
+
+
 mvn package
+
+echo "--------------- Benchmark --------------------"
+$JAVA_HOME/bin/java --add-modules jdk.incubator.vector -jar target/benchmarks.jar 
