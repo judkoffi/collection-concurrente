@@ -51,7 +51,6 @@ public class ForkJoinCollections {
 
   private static <V, T> V forkJoinReduce(Spliterator<T> spliterator, int threshold, V initialValue,
       BiFunction<T, V, V> accumulator, BinaryOperator<V> combiner) {
-
     var task = new ReducerTask<>(spliterator, initialValue, threshold, accumulator, combiner);
     return ForkJoinPool//
       .commonPool()

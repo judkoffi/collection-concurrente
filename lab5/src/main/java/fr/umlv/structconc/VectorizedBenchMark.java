@@ -45,4 +45,19 @@ public class VectorizedBenchMark {
   public int sub_loop() {
     return Vectorized.differenceLoop(array);
   }
+
+  @Benchmark
+  public int sub_min() {
+    return Vectorized.minStream(array);
+  }
+
+  @Benchmark
+  public int sub_max() {
+    return Vectorized.maxStream(array);
+  }
+
+  @Benchmark
+  public int[] sub_min_max() {
+    return Vectorized.minmax(array);
+  }
 }
