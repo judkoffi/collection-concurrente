@@ -79,8 +79,8 @@ public class Vectorized {
   }
 
   public static int[] minmax(int[] array) {
-    IntVector minVector = IntVector.zero(SPECIES);
-    IntVector maxVector = IntVector.zero(SPECIES);
+    IntVector minVector = IntVector.broadcast(SPECIES, Integer.MAX_VALUE);
+    IntVector maxVector = IntVector.broadcast(SPECIES, Integer.MIN_VALUE);
 
     var i = 0;
     var limit = array.length - (array.length % SPECIES.length()); // main loop
@@ -91,8 +91,8 @@ public class Vectorized {
       maxVector = maxVector.max(vector);
     }
 
-    int min = minVector.reduceLanes(VectorOperators.ADD);
-    int max = maxVector.reduceLanes(VectorOperators.ADD);
+    int min = minVector.reduceLanes(VectorOperators.MIN);
+    int max = maxVector.reduceLanes(VectorOperators.MAX);
 
     for (; i < array.length; i++) { // post loop
       if (array[i] < min) {
@@ -109,22 +109,10 @@ public class Vectorized {
 
 
   public static int minStream(int[] array) {
-    return Arrays.stream(array).min().getAsInt();
+    return Arrays.stream(array).min().orElse(Integer.MAX_VALUE);
   }
 
   public static int maxStream(int[] array) {
-    return Arrays.stream(array).max().getAsInt();
-  }
-
-
-  public static void main(String[] args) {
-    var a = new int[] {1, 5, 1, 3, 0};
-    var v = minmax(a);
-
-    System.out.println("min: " + v[0]);
-    System.out.println("max: " + v[1]);
-
-    var b = Arrays.stream(a).max().getAsInt();
-    System.out.println("stream " + b);
+    return Arrays.stream(array).max().orElse(Integer.MIN_VALUE);
   }
 }
