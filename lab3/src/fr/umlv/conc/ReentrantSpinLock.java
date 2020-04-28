@@ -5,7 +5,7 @@ import java.lang.invoke.VarHandle;
 
 // Tips volatile:
 /*
- * Toujours lire les volire avant de lire les autres champs, cela garantie que les champs seront lu
+ * Toujours lire les volatile avant de lire les autres champs, cela garantie que les champs seront lu
  * en RAM
  */
 

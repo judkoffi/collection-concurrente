@@ -24,7 +24,7 @@ public class SpinLock {
   }
 
   public boolean tryLock() {
-    // on essaie de prend si on peu on le prends donc ol le passe a true
+    // on essaie de prend si on peu on le prends donc on le passe a true
     // sinon on l'a pas et on renvoie false
     return HANDLE.compareAndSet(this, false, true);
   }
